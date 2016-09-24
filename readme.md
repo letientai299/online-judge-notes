@@ -1,7 +1,7 @@
 Online Judge Notes
 ==================
 
-Tips and tricks for more convenient during playing on judge site like
+Tips and tricks for more convenient when playing on judge sites like
 Hackerrank...
 
 
@@ -12,6 +12,14 @@ Goals
 your `input.txt` when running locally.
 
 - Make logging statement only work if program is running locally.
+
+> **Disclaimer**
+>
+> _I'm just a newbie in those Scala, JavaScript and Python languages.
+> Solving problems on judge sites is my way to learn them. Hence, the
+> tips and trick you find here may not the best way to do the task. Pull
+> request or suggestion are always welcomed._
+
 
 Scala
 -----
@@ -52,3 +60,86 @@ var input = fs.readFileSync('./input.txt').toString('utf8').trim()
 var log = isOnLocalMachine()? console.log.bind(console) : ()=>{}
 ```
 
+Python
+------
+```python
+import os
+import sys
+
+INPUT_FILE = "input.txt"
+
+#  Redirect stdin to the input file if it is existed
+if os.path.isfile(INPUT_FILE):
+    sys.stdin= open(INPUT_FILE)
+    pass
+
+# Use Ctrl-D to stop stdin if you run the program without input.txt file
+for line in sys.stdin.read().splitlines():
+    print(line)
+
+```
+
+
+Auto restart program when script change
+---------------------------------------
+
+With the setup above, I could test my code with local input, to see if my
+algorithm works. But I'm tired of switching from vim to terminal and execute
+the script manually (python or js). I use [Nodemon](https://github.com/remy/nodemon) to restart program automatically once file change.
+
+This approach works with other scripting language too.
+
+### Install nodemon with [npm](https://www.npmjs.com/)
+
+```sh
+npm install -g nodemon
+
+# Reload path
+hash -rf
+```
+
+### Config nodemon.json
+
+```json
+{
+  "verbose": true,
+  "execMap": {
+    "py": "python3",
+    "js": "node"
+  }
+}
+```
+
+### Let's nodemon watch your file
+
+```sh
+# for python
+nodemon script.py
+
+# for nodejs
+nodemon script.js
+```
+
+Now edit the code in your favorite editor and see the result on the terminal running nodemon.
+
+### Bonus: Config nodemon with package.json
+
+```json
+{
+  "name": "...",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.15.0"
+  }
+}
+```
+
+I have not found a solution for non-npm yet. Actually, who want to learn js
+without nodejs nowadays?
