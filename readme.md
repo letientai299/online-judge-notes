@@ -78,6 +78,14 @@ if os.path.isfile(INPUT_FILE):
 # Only print log statement if running in local
 log = lambda *args: print("[DEBUG]", *args) if DEBUG else lambda x: None
 
+# Utils - you may not need it
+def reads(): # read string array
+    return input().split()
+
+def read_ints(): # read integer array
+    return list(map(int, reads()))
+
+
 # Use Ctrl-D to stop stdin if you run the program without input.txt file
 for line in sys.stdin.read().splitlines():
     log(line)
