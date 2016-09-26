@@ -67,14 +67,20 @@ import os
 import sys
 
 INPUT_FILE = "input.txt"
+DEBUG = False
 
 #  Redirect stdin to the input file if it is existed
 if os.path.isfile(INPUT_FILE):
     sys.stdin= open(INPUT_FILE)
+    DEBUG = True
     pass
+
+# Only print log statement if running in local
+log = lambda *args: print("[DEBUG]", *args) if DEBUG else lambda x: None
 
 # Use Ctrl-D to stop stdin if you run the program without input.txt file
 for line in sys.stdin.read().splitlines():
+    log(line)
     print(line)
 
 ```
