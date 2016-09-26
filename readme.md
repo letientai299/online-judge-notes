@@ -100,12 +100,16 @@ hash -rf
 
 ### Config nodemon.json
 
+The following configuration will make nodemon watch for changes on `*.txt`
+ or `*.py` file in the working directory.
+
 ```json
 {
-  "verbose": true,
+  "verbose": false,
+  "watch": ["./"],
+  "ext": "txt py",
   "execMap": {
-    "py": "python3",
-    "js": "node"
+    "py": "python3"
   }
 }
 ```
