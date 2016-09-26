@@ -76,7 +76,10 @@ if os.path.isfile(INPUT_FILE):
     pass
 
 # Only print log statement if running in local
-log = lambda *args: print("[DEBUG]", *args) if DEBUG else lambda x: None
+def log(*args):
+    if DEBUG:
+        print("[DEBUG]", *args)
+
 
 # Utils - you may not need it
 def reads(): # read string array
