@@ -31,8 +31,6 @@ import scala.io.Source
 
 object Solution {
 
-  case class Point(x: Double, y: Double) {}
-
   val INPUT_FILE = "input.txt"
 
   def readLines: List[String] = {
