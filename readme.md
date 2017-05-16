@@ -25,16 +25,28 @@ Scala
 -----
 
 ```scala
-/**
- * Read all lines from stdin or file, depend on where the program is running.
- */
-def readLines: List[String] = {
-  val lines = if (Files.exists(Paths.get(INPUT_FILE))) {
-    Source.fromFile(INPUT_FILE).getLines()
-  } else {
-    Source.stdin.getLines()
+import java.nio.file.{Files, Paths}
+
+import scala.io.Source
+
+object Solution {
+
+  case class Point(x: Double, y: Double) {}
+
+  val INPUT_FILE = "input.txt"
+
+  def readLines: List[String] = {
+    val lines = if (Files.exists(Paths.get(INPUT_FILE))) {
+      Source.fromFile(INPUT_FILE).getLines()
+    } else {
+      Source.stdin.getLines()
+    }
+    lines.map(_.trim).toList
   }
-  lines.map(_.trim).toList
+
+  def main(args: Array[String]): Unit = {
+    println(readLines)
+  }
 }
 ```
 
