@@ -54,20 +54,39 @@ JavaScript
 Check if script is running locally
 
 ```javascript
+const INPUT_FILE = "./input.txt"
 var fs = require('fs')
 
-var isOnLocalMachine = function() {
+// Only print debugging statement if this is running on local machine
+function isOnLocalMachine() {
   try {
-    return fs.statSync('./app.js').isFile();
-  } catch(e) {
+    return fs.statSync(INPUT_FILE).isFile();
+  } catch (e) {
     return false;
   }
 }
 
-var input = fs.readFileSync('./input.txt').toString('utf8').trim()
+var log = isOnLocalMachine() ? console.log.bind(console) : () => {}
 
-// After this line, for debugging purpose, always you log() function
-var log = isOnLocalMachine()? console.log.bind(console) : ()=>{}
+if (isOnLocalMachine()) {
+  var input = fs.readFileSync('./input.txt').toString('utf8').trim()
+  process(input);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  input = "";
+  process.stdin.on("data", function(d) {
+    input += d;
+  });
+
+  process.stdin.on("end", function() {
+    process(input)
+  });
+}
+
+function process(input) {
+  // solution code goes here
+}
 ```
 
 Python
