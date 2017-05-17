@@ -70,7 +70,7 @@ var log = isOnLocalMachine() ? console.log.bind(console) : () => {}
 
 if (isOnLocalMachine()) {
   var input = fs.readFileSync('./input.txt').toString('utf8').trim()
-  process(input);
+  solve(input);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");
@@ -80,11 +80,11 @@ if (isOnLocalMachine()) {
   });
 
   process.stdin.on("end", function() {
-    process(input)
+    solve(input)
   });
 }
 
-function process(input) {
+function solve(input) {
   // solution code goes here
 }
 ```
