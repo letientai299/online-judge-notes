@@ -125,6 +125,22 @@ for line in sys.stdin.read().splitlines():
 
 ```
 
+Kotlin
+------
+
+```kotlin
+import java.io.File
+import java.util.*
+
+val inputFile = File("input.txt")
+
+val input: Scanner = if (inputFile.exists()) Scanner(inputFile) else Scanner(System.`in`)
+
+fun main(args: Array<String>) {
+  // have fun
+}
+```
+
 
 Auto restart program when script change
 ---------------------------------------
